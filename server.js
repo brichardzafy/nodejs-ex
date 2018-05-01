@@ -2,7 +2,7 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
-    
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -96,6 +96,11 @@ app.get('/pagecount', function (req, res) {
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.status(500).send('Something bad happened!');
+});
+
+app.get('/env',function(req, res){
+
+  res.json(process.env);
 });
 
 initDb(function(err){
